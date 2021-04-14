@@ -21,5 +21,6 @@ function showWinner() {
   document.querySelector('.player-turn').classList.add('hidden')
   document.querySelector('.winner-icon').innerText = game.currentPlayer.token
   document.querySelector('.game-won').classList.remove('hidden')
+  document.querySelector('.border-override').style.pointerEvents='auto'
 }
 

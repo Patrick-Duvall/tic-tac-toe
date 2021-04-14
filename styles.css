@@ -1,3 +1,7 @@
+body {
+  overflow-y: hidden
+}
+
 .layout-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -30,7 +34,6 @@
   display: grid;
   width: 600px;
   height: 600px;
-  border: -10px solid white;
   grid-template: repeat(3, 1fr) / repeat(3, 1fr);
   position: relative;
   margin: 10% auto 0;
@@ -43,7 +46,7 @@
     left: 0;
     right: 0;
     border: 5px solid white;
-    z-index: -1;
+    pointer-events: none; 
 }
 
 .game-cell {
@@ -58,6 +61,8 @@
 .player-one {
   background-image: linear-gradient(rgb(33, 158, 188), rgb(142, 202, 230),  orange);
 }
+
+/* overflow scroll */
 
 .player-two {
   background-image: linear-gradient(orange, rgb(255, 183, 3),  rgb(33, 158, 188));
