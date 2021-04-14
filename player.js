@@ -4,4 +4,8 @@ class Player {
     this.token = token
     this.wins = []
   }
+
+  winCount(){
+    this.wins.length
+  }
 }

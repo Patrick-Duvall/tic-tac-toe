@@ -18,21 +18,53 @@ for(let i = 0; i < gameCells.length; i++) {
 }
 
 function finishGame() {
-  document.querySelector('.player-turn').classList.add('hidden')
-  document.querySelector('.winner-icon').innerText = game.currentPlayer.token
-  document.querySelector('.game-won').classList.remove('hidden')
-  document.querySelector('.border-override').style.pointerEvents='auto'
+  displayWinner()
+  displayPlayerWins()
+  makeBoardUnclickable()
   setTimeout(function () {startNewGame()}, 3000);
 }
 
 function startNewGame() {
-  game.winner.wins.push(game.board)
   game = new Game(playerOne, playerTwo)
-  document.querySelector('.border-override').style.pointerEvents = 'none'
-  for (let i = 0; i < gameCells.length; i++){
+  makeBoardClickable()
+  displayNewGame()
+}
+
+function displayWinner(){
+  document.querySelector('.player-turn').classList.add('hidden')
+  document.querySelector('.winner-icon').innerText = game.currentPlayer.token
+  document.querySelector('.game-won').classList.remove('hidden')
+}
+
+function displayNewGame() {
+  for (let i = 0; i < gameCells.length; i++) {
     gameCells[i].innerHTML = ''
   }
   currentPlayerIcon.innerText = game.currentPlayer.token
   document.querySelector('.player-turn').classList.remove('hidden')
   document.querySelector('.game-won').classList.add('hidden')
+}
+
+function makeBoardClickable(){
+  document.querySelector('.border-override').style.pointerEvents = 'none'
+}
+
+function makeBoardUnclickable(){
+  document.querySelector('.border-override').style.pointerEvents = 'auto'
+}
+
+function displayPlayerWins(){
+  var playerOneWins = document.querySelector('.player-one-wins-grid')
+  var tinyWins = ''
+  for (let i = 0; i < playerOne.wins.length; i++){
+    tinyWins += `<div class="mini-game-board">`
+    for(let j = 0; j < 9; j++) {
+      tinyWins += `
+      <div class="mini-game-cell" id="0">${playerOne.wins[i][j]}</div>
+      `
+    }
+    tinyWins += `</div>`
+  }
+  // debugger
+  playerOneWins.innerHTML = tinyWins
 }

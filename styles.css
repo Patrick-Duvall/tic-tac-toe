@@ -58,12 +58,32 @@ body {
   font-size: 100px;
 }
 
-.player-one {
+.mini-game-board {
+  display: grid;
+  background-color: white;
+  width: 100px;
+  height: 100px;
+  grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+  position: relative;
+  border-radius: 2px;
+
+  margin: 10% auto 0;
+}
+
+.mini-game-cell {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  font-size: 14px;
+}
+
+.player-one-player-area {
   background-image: linear-gradient(rgb(33, 158, 188), rgb(142, 202, 230),  orange);
 }
 
 /* overflow scroll */
 
-.player-two {
+.player-two-player-area {
   background-image: linear-gradient(orange, rgb(255, 183, 3),  rgb(33, 158, 188));
 }

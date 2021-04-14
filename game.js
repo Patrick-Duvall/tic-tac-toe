@@ -17,8 +17,8 @@ class Game {
     this.board[index] = this.currentPlayer.token
     this.checkIsGameWon()
     if(this.isGameWon) this.winner = this.currentPlayer
-    if (this.winner) return
-    this.currentPlayer = this.currentPlayer === this.playerOne ? this.playerTwo : this.playerOne;
+    if (this.winner) return this.recordWinner()
+    this.changePlayer()
   }
 
   checkIsGameWon(){
@@ -30,5 +30,13 @@ class Game {
     if(this.board[2] && this.board[2] == this.board[5] && this.board[2] == this.board[8]) this.isGameWon = true
     if(this.board[0] && this.board[0] == this.board[4] && this.board[0] == this.board[8]) this.isGameWon = true
     if(this.board[2] && this.board[2] == this.board[4] && this.board[2] == this.board[6]) this.isGameWon = true
+  }
+
+  recordWinner(){
+    this.winner.wins.push(this.board)
+  }
+
+  changePlayer(){
+    this.currentPlayer = this.currentPlayer === this.playerOne ? this.playerTwo : this.playerOne;
   }
 }
