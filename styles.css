@@ -39,10 +39,16 @@
     left: 0;
     right: 0;
     border: 5px solid white;
+    z-index: -1;
 }
 
 .game-cell {
-  border: 5px solid rgb(7, 49, 70)
+  border: 5px solid rgb(7, 49, 70);
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  font-size: 100px;
 }
 
 .player-one {
