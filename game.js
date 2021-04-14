@@ -15,6 +15,20 @@ class Game {
     index = parseInt(index)
     if(this.board[index]) return
     this.board[index] = this.currentPlayer.token
+    this.checkIsGameWon()
+    if(this.isGameWon) this.winner = this.currentPlayer
+    if (this.winner) return
     this.currentPlayer = this.currentPlayer === this.playerOne ? this.playerTwo : this.playerOne;
+  }
+
+  checkIsGameWon(){
+    if(this.board[0] && this.board[0] == this.board[1] && this.board[0] == this.board[2]) this.isGameWon = true
+    if(this.board[3] && this.board[3] == this.board[4] && this.board[3] == this.board[5]) this.isGameWon = true
+    if(this.board[6] && this.board[6] == this.board[7] && this.board[6] == this.board[8]) this.isGameWon = true
+    if(this.board[0] && this.board[0] == this.board[3] && this.board[0] == this.board[6]) this.isGameWon = true
+    if(this.board[1] && this.board[1] == this.board[4] && this.board[1] == this.board[7]) this.isGameWon = true
+    if(this.board[2] && this.board[2] == this.board[5] && this.board[2] == this.board[8]) this.isGameWon = true
+    if(this.board[0] && this.board[0] == this.board[4] && this.board[0] == this.board[8]) this.isGameWon = true
+    if(this.board[2] && this.board[2] == this.board[4] && this.board[2] == this.board[6]) this.isGameWon = true
   }
 }

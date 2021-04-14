@@ -13,6 +13,13 @@ for(let i = 0; i < gameCells.length; i++) {
     game.takeTurn(gameCells[i].id)
     gameCells[i].innerText = game.board[i]
     currentPlayerIcon.innerText = game.currentPlayer.token
+    if (game.winner) showWinner()
   })
+}
+
+function showWinner() {
+  document.querySelector('.player-turn').classList.add('hidden')
+  document.querySelector('.winner-icon').innerText = game.currentPlayer.token
+  document.querySelector('.game-won').classList.remove('hidden')
 }
 
