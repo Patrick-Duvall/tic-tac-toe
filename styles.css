@@ -1,3 +1,7 @@
+body {
+  overflow-y: hidden
+}
+
 .layout-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -6,6 +10,10 @@
   margin: -10px;
   text-align: center;
   color: rgb(7, 49, 70);
+}
+
+.hidden {
+  display: none!important;
 }
 
 .layout-grid h1 {
@@ -26,7 +34,6 @@
   display: grid;
   width: 600px;
   height: 600px;
-  border: -10px solid white;
   grid-template: repeat(3, 1fr) / repeat(3, 1fr);
   position: relative;
   margin: 10% auto 0;
@@ -39,15 +46,23 @@
     left: 0;
     right: 0;
     border: 5px solid white;
+    pointer-events: none; 
 }
 
 .game-cell {
-  border: 5px solid rgb(7, 49, 70)
+  border: 5px solid rgb(7, 49, 70);
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  font-size: 100px;
 }
 
 .player-one {
   background-image: linear-gradient(rgb(33, 158, 188), rgb(142, 202, 230),  orange);
 }
+
+/* overflow scroll */
 
 .player-two {
   background-image: linear-gradient(orange, rgb(255, 183, 3),  rgb(33, 158, 188));
