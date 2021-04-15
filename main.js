@@ -8,9 +8,9 @@ window.onload = function () {
 }
 
 var gameCells = document.querySelectorAll('.game-cell')
+startNewGame()
 var currentPlayerIcon = document.querySelector('.current-player-icon')
 
-startNewGame()
 
 // Connect Dom to Game Board
 for(let i = 0; i < gameCells.length; i++) {

@@ -17,7 +17,7 @@ class Game {
     this.board[index] = this.currentPlayer.token
     this.checkIsGameWon()
     this.checkisGameDraw()
-    if (this.winner) return recordWin()
+    if (this.winner) return this.recordWin()
     this.changePlayer()
   }
 
