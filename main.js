@@ -19,7 +19,7 @@ for(let i = 0; i < gameCells.length; i++) {
 
 function finishGame() {
   displayWinner()
-  displayPlayerWins()
+  displayBothPlayerWins()
   makeBoardUnclickable()
   setTimeout(function () {startNewGame()}, 3000);
 }
@@ -53,18 +53,24 @@ function makeBoardUnclickable(){
   document.querySelector('.border-override').style.pointerEvents = 'auto'
 }
 
-function displayPlayerWins(){
-  var playerOneWins = document.querySelector('.player-one-wins-grid')
+function displayBothPlayerWins(){
+  var playerOneWins = document.querySelector('.player-one-wins')
+  var playerTwoWins = document.querySelector('.player-two-wins')
+  displayPlayerWins(playerOne, playerOneWins)
+  displayPlayerWins(playerTwo, playerTwoWins)
+  
+}
+
+function displayPlayerWins(player, playerWinsArea) {
   var tinyWins = ''
-  for (let i = 0; i < playerOne.wins.length; i++){
+  for (let i = 0; i < player.wins.length; i++) {
     tinyWins += `<div class="mini-game-board">`
-    for(let j = 0; j < 9; j++) {
+    for (let j = 0; j < 9; j++) {
       tinyWins += `
-      <div class="mini-game-cell" id="0">${playerOne.wins[i][j]}</div>
+      <div class="mini-game-cell" id="0">${player.wins[i][j]}</div>
       `
     }
     tinyWins += `</div>`
   }
-  // debugger
-  playerOneWins.innerHTML = tinyWins
+  playerWinsArea.innerHTML = tinyWins
 }
