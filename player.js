@@ -8,4 +8,13 @@ class Player {
   winCount(){
     return this.wins.length.toString()
   }
+
+  saveWinsToStorage() {
+    localStorage.setItem(`player-${this.id}-wins`, JSON.stringify(this.wins))
+  }
+
+  retrieveWinsFromStorage() {
+    let wins = JSON.parse(localStorage.getItem(`player-${this.id}-wins`))
+    if (wins) this.wins = wins
+  }
 }
