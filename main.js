@@ -13,14 +13,73 @@ for(let i = 0; i < gameCells.length; i++) {
     game.takeTurn(gameCells[i].id)
     gameCells[i].innerText = game.board[i]
     currentPlayerIcon.innerText = game.currentPlayer.token
-    if (game.winner) showWinner()
+    if (game.winner) finishGame('win')
+    if (game.isDraw) finishGame('draw')
   })
 }
 
-function showWinner() {
+function finishGame(result) {
+  if(result === 'win') displayWinner()
+  if(result === 'draw') displayDraw()
+  displayBothPlayerWins()
+  makeBoardUnclickable()
+  setTimeout(function () {startNewGame()}, 3000);
+}
+
+function startNewGame() {
+  game = new Game(playerOne, playerTwo)
+  makeBoardClickable()
+  displayNewGame()
+}
+
+function displayDraw() {
+  document.querySelector('.game-draw').classList.remove('hidden')
+  document.querySelector('.player-turn').classList.add('hidden')
+}
+
+function displayWinner(){
   document.querySelector('.player-turn').classList.add('hidden')
   document.querySelector('.winner-icon').innerText = game.currentPlayer.token
   document.querySelector('.game-won').classList.remove('hidden')
-  document.querySelector('.border-override').style.pointerEvents='auto'
 }
 
+function displayNewGame() {
+  for (let i = 0; i < gameCells.length; i++) {
+    gameCells[i].innerHTML = ''
+  }
+  currentPlayerIcon.innerText = game.currentPlayer.token
+  document.querySelector('.player-turn').classList.remove('hidden')
+  document.querySelector('.game-won').classList.add('hidden')
+  document.querySelector('.game-draw').classList.add('hidden')
+}
+
+function makeBoardClickable(){
+  document.querySelector('.border-override').style.pointerEvents = 'none'
+}
+
+function makeBoardUnclickable(){
+  document.querySelector('.border-override').style.pointerEvents = 'auto'
+}
+
+function displayBothPlayerWins(){
+  var playerOneWins = document.querySelector('.player-one-wins')
+  var playerTwoWins = document.querySelector('.player-two-wins')
+  displayPlayerWinBoards(playerOne, playerOneWins)
+  displayPlayerWinBoards(playerTwo, playerTwoWins)
+  document.querySelector('.player-one-win-count').innerText = playerOne.winCount()
+  document.querySelector('.player-two-win-count').innerText = playerTwo.winCount()
+}
+
+function displayPlayerWinBoards(player, playerWinsArea) {
+  var tinyWins = ''
+  for (let i = 0; i < player.wins.length; i++) {
+    tinyWins += `<div class="mini-game-board">`
+    for (let j = 0; j < 9; j++) {
+      tinyWins += `
+      <div class="mini-game-cell" id="0">${player.wins[i][j]}</div>
+      `
+    }
+    tinyWins += `</div>`
+  }
+  playerWinsArea.innerHTML = tinyWins
+}
