@@ -17,11 +17,7 @@ class Game {
     this.board[index] = this.currentPlayer.token
     this.checkIsGameWon()
     this.checkisGameDraw()
-    if (this.winner) {
-      this.winner.wins.push(this.board)
-      this.currentPlayer.saveWinsToStorage()
-      return
-    }
+    if (this.winner) return recordWin()
     this.changePlayer()
   }
 
@@ -38,6 +34,11 @@ class Game {
 
   checkisGameDraw() {
     this.isDraw = this.board.every((cell) => cell !== '') && !this.winner
+  }
+
+  recordWin() {
+    this.winner.wins.push(this.board)
+    this.currentPlayer.saveWinsToStorage()
   }
 
   changePlayer(){
