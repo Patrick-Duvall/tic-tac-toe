@@ -8,4 +8,8 @@ class Player {
   winCount(){
     return this.wins.length.toString()
   }
+
+  saveWinsToStorage() {
+    localStorage.setItem(`player-${this.id}-wins`, JSON.stringify(this.wins))
+  }
 }

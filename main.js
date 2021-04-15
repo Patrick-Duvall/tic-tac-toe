@@ -1,12 +1,18 @@
-
 var playerOne = new Player('one', '🔥')
 var playerTwo = new Player('two', '💧')
 
-var game = new Game(playerOne, playerTwo)
+window.onload = function () {
+  playerOneWins = JSON.parse(localStorage.getItem('player-one-wins')) 
+  playerTwoWins = JSON.parse(localStorage.getItem('player-two-wins'))
+  if ( playerOneWins ) playerOne.wins = playerOneWins
+  if ( playerTwoWins ) playerTwo.wins = playerTwoWins
+  displayBothPlayerWins()
+}
 
 var gameCells = document.querySelectorAll('.game-cell')
+startNewGame()
+
 var currentPlayerIcon = document.querySelector('.current-player-icon')
-currentPlayerIcon.innerText = game.currentPlayer.token
 
 for(let i = 0; i < gameCells.length; i++) {
   gameCells[i].addEventListener('click', function(){
@@ -44,10 +50,8 @@ function displayWinner(){
 }
 
 function displayNewGame() {
-  for (let i = 0; i < gameCells.length; i++) {
-    gameCells[i].innerHTML = ''
-  }
-  currentPlayerIcon.innerText = game.currentPlayer.token
+  for (let i = 0; i < gameCells.length; i++) gameCells[i].innerHTML = ''
+  currentPlayerIcon = game.currentPlayer.token
   document.querySelector('.player-turn').classList.remove('hidden')
   document.querySelector('.game-won').classList.add('hidden')
   document.querySelector('.game-draw').classList.add('hidden')
@@ -62,10 +66,10 @@ function makeBoardUnclickable(){
 }
 
 function displayBothPlayerWins(){
-  var playerOneWins = document.querySelector('.player-one-wins')
-  var playerTwoWins = document.querySelector('.player-two-wins')
-  displayPlayerWinBoards(playerOne, playerOneWins)
-  displayPlayerWinBoards(playerTwo, playerTwoWins)
+  var playerOneWinsArea = document.querySelector('.player-one-wins')
+  var playerTwoWinsArea = document.querySelector('.player-two-wins')
+  displayPlayerWinBoards(playerOne, playerOneWinsArea)
+  displayPlayerWinBoards(playerTwo, playerTwoWinsArea)
   document.querySelector('.player-one-win-count').innerText = playerOne.winCount()
   document.querySelector('.player-two-win-count').innerText = playerTwo.winCount()
 }
