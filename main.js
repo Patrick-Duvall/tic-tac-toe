@@ -2,10 +2,8 @@ var playerOne = new Player('one', '🔥')
 var playerTwo = new Player('two', '💧')
 
 window.onload = function () {
-  playerOneWins = JSON.parse(localStorage.getItem('player-one-wins')) 
-  playerTwoWins = JSON.parse(localStorage.getItem('player-two-wins'))
-  if ( playerOneWins ) playerOne.wins = playerOneWins
-  if ( playerTwoWins ) playerTwo.wins = playerTwoWins
+  playerOne.retrieveWinsFromStorage()
+  playerTwo.retrieveWinsFromStorage()
   displayBothPlayerWins()
 }
 
