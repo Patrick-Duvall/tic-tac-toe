@@ -45,7 +45,7 @@ overflow-y: hidden
     bottom: 0;
     left: 0;
     right: 0;
-    border: 5px solid white;
+    border: 6px solid white;
     pointer-events: none; 
 }
 
