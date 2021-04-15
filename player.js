@@ -6,6 +6,6 @@ class Player {
   }
 
   winCount(){
-    this.wins.length
+    return this.wins.length.toString()
   }
 }

@@ -13,12 +13,14 @@ for(let i = 0; i < gameCells.length; i++) {
     game.takeTurn(gameCells[i].id)
     gameCells[i].innerText = game.board[i]
     currentPlayerIcon.innerText = game.currentPlayer.token
-    if (game.winner) finishGame()
+    if (game.winner) finishGame('win')
+    if (game.isDraw) finishGame('draw')
   })
 }
 
-function finishGame() {
-  displayWinner()
+function finishGame(result) {
+  if(result === 'win') displayWinner()
+  if(result === 'draw') displayDraw()
   displayBothPlayerWins()
   makeBoardUnclickable()
   setTimeout(function () {startNewGame()}, 3000);
@@ -28,6 +30,11 @@ function startNewGame() {
   game = new Game(playerOne, playerTwo)
   makeBoardClickable()
   displayNewGame()
+}
+
+function displayDraw() {
+  document.querySelector('.game-draw').classList.remove('hidden')
+  document.querySelector('.player-turn').classList.add('hidden')
 }
 
 function displayWinner(){
@@ -43,6 +50,7 @@ function displayNewGame() {
   currentPlayerIcon.innerText = game.currentPlayer.token
   document.querySelector('.player-turn').classList.remove('hidden')
   document.querySelector('.game-won').classList.add('hidden')
+  document.querySelector('.game-draw').classList.add('hidden')
 }
 
 function makeBoardClickable(){
@@ -56,12 +64,13 @@ function makeBoardUnclickable(){
 function displayBothPlayerWins(){
   var playerOneWins = document.querySelector('.player-one-wins')
   var playerTwoWins = document.querySelector('.player-two-wins')
-  displayPlayerWins(playerOne, playerOneWins)
-  displayPlayerWins(playerTwo, playerTwoWins)
-  
+  displayPlayerWinBoards(playerOne, playerOneWins)
+  displayPlayerWinBoards(playerTwo, playerTwoWins)
+  document.querySelector('.player-one-win-count').innerText = playerOne.winCount()
+  document.querySelector('.player-two-win-count').innerText = playerTwo.winCount()
 }
 
-function displayPlayerWins(player, playerWinsArea) {
+function displayPlayerWinBoards(player, playerWinsArea) {
   var tinyWins = ''
   for (let i = 0; i < player.wins.length; i++) {
     tinyWins += `<div class="mini-game-board">`

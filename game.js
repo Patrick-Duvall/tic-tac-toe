@@ -16,20 +16,24 @@ class Game {
     if(this.board[index]) return
     this.board[index] = this.currentPlayer.token
     this.checkIsGameWon()
-    if(this.isGameWon) this.winner = this.currentPlayer
+    this.checkisGameDraw()
     if (this.winner) return this.recordWinner()
     this.changePlayer()
   }
 
   checkIsGameWon(){
-    if(this.board[0] && this.board[0] == this.board[1] && this.board[0] == this.board[2]) this.isGameWon = true
-    if(this.board[3] && this.board[3] == this.board[4] && this.board[3] == this.board[5]) this.isGameWon = true
-    if(this.board[6] && this.board[6] == this.board[7] && this.board[6] == this.board[8]) this.isGameWon = true
-    if(this.board[0] && this.board[0] == this.board[3] && this.board[0] == this.board[6]) this.isGameWon = true
-    if(this.board[1] && this.board[1] == this.board[4] && this.board[1] == this.board[7]) this.isGameWon = true
-    if(this.board[2] && this.board[2] == this.board[5] && this.board[2] == this.board[8]) this.isGameWon = true
-    if(this.board[0] && this.board[0] == this.board[4] && this.board[0] == this.board[8]) this.isGameWon = true
-    if(this.board[2] && this.board[2] == this.board[4] && this.board[2] == this.board[6]) this.isGameWon = true
+    if(this.board[0] && this.board[0] == this.board[1] && this.board[0] == this.board[2]) this.winner = this.currentPlayer
+    if(this.board[3] && this.board[3] == this.board[4] && this.board[3] == this.board[5]) this.winner = this.currentPlayer
+    if(this.board[6] && this.board[6] == this.board[7] && this.board[6] == this.board[8]) this.winner = this.currentPlayer
+    if(this.board[0] && this.board[0] == this.board[3] && this.board[0] == this.board[6]) this.winner = this.currentPlayer
+    if(this.board[1] && this.board[1] == this.board[4] && this.board[1] == this.board[7]) this.winner = this.currentPlayer
+    if(this.board[2] && this.board[2] == this.board[5] && this.board[2] == this.board[8]) this.winner = this.currentPlayer
+    if(this.board[0] && this.board[0] == this.board[4] && this.board[0] == this.board[8]) this.winner = this.currentPlayer
+    if(this.board[2] && this.board[2] == this.board[4] && this.board[2] == this.board[6]) this.winner = this.currentPlayer
+  }
+
+  checkisGameDraw() {
+    this.isDraw = this.board.every((cell) => cell !== '') && !this.winner
   }
 
   recordWinner(){
